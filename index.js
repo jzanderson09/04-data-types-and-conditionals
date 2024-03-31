@@ -32,38 +32,39 @@ if (values.testGroup === "a") {
   }
 }
 
+// 'b' testGroup value testing changed to allow user input.
 if (values.testGroup === "b") {
-  if (values.birthYear !== 1947) {
-    console.error(`birthYear is incorrect, it's currently: "${values.birthYear}"`);
+  if (typeof(values.birthYear) !== "number") {
+    console.error(`"${values.birthYear}" is not a number!`);
     errored = true;
   }
 
-  if (values.thisYear !== 1965) {
-    console.error(`thisYear is incorrect, it's currently: "${values.thisYear}"`);
+  if (typeof(values.thisYear) !== "number") {
+    console.error(`"${values.thisYear}" is not a number!`);
     errored = true;
   }
 
-  if (values.firstName !== "Carlos") {
-    console.error(`firstName is incorrect, it's currently: "${values.firstName}"`);
+  if (typeof(values.firstName) !== "string") {
+    console.error(`"${values.firstName}" is not a string!`);
     errored = true;
   }
 
-  if (values.lastName !== "Stevenson") {
-    console.error(`lastName is incorrect, it's currently: "${values.lastName}"`);
+  if (typeof(values.lastName) !== "string") {
+    console.error(`"${values.lastName}" is not a string!`);
     errored = true;
   }
 
-  if (values.age !== 18) {
-    console.error(`age is incorrect, it's currently: "${values.age}"`);
+  if (typeof(values.age) !== "number") {
+    console.error(`"${values.age}" is not a number!`);
     errored = true;
   }
 
-  if (values.fullName !== "Carlos Stevenson") {
-    console.error(`fullName is incorrect, it's currently: "${values.fullName}"`);
+  if (values.fullName !== `${values.firstName} ${values.lastName}`) {
+    console.error(`You provided "${values.fullName}", your full name should be ${values.firstName} ${values.lastName}`);
     errored = true;
   }
 
-  if (values.greeting !== "Hello! My name is Carlos Stevenson and I am 18 years old.") {
+  if (values.greeting !== `Hello! My name is ${values.fullName} and I am ${values.age} years old.`) {
     console.error(`greeting is incorrect, it's currently: "${values.greeting}"`);
     errored = true;
   }

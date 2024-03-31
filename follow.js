@@ -1,3 +1,7 @@
+const prompt = require('prompt-sync')({ sigint: true });
+const { toast } = require('alert');
+const alert = toast;
+
 /**
 - After each step, run the code to make sure your code still works! 
 
@@ -13,14 +17,14 @@
 */
 
 // code to be deleted
-const birthYear = 1947;
-const thisYear = 1965;
-const firstName = "Carlos";
-const lastName = "Stevenson";
+// const birthYear = 1947;
+// const thisYear = 1965;
+// const firstName = "Carlos";
+// const lastName = "Stevenson";
 
-const greeting = "Hello! My name is " + firstName + " " + lastName + " and I am " + (thisYear - birthYear) + " years old.";
+// const greeting = "Hello! My name is " + firstName + " " + lastName + " and I am " + (thisYear - birthYear) + " years old.";
 
-console.log(greeting);
+// console.log(greeting);
 
 /*
 
@@ -50,10 +54,78 @@ console.log(greeting);
 
   The greeting should say: "Hello! My name is Carlos Stevenson and I am 18 years old."
 
+  ** User note **
+
+  --> Code updated to allow user input via Replit or node/console/terminal.
+
 */
 
 //===== Your code goes here =================
 
+// Generic prompt to confirm user input:
+const confirmPrompt = (varPrompt, varType, varValue) => {
+  let response = prompt(`To confirm: Your ${varType} is ${varValue}, is that right?`);
+  response = response.toString().toLowerCase().charAt(0);
+  console.log(response);
+  if (response !== "y") {
+    switch (varType) {
+      case BIRTH_YEAR:
+        birthYear = parseInt(prompt(varPrompt));
+        confirmPrompt(varPrompt, varType, varValue);
+
+      case FIRST_NAME:
+        firstName = prompt(varPrompt);
+        confirmPrompt(varPrompt, varType, varValue);
+
+      case LAST_NAME:
+        lastName = prompt(varPrompt);
+        confirmPrompt(varPrompt, varType, varValue);
+
+      default:
+        break;
+    }
+  }
+}
+
+// Glossary:
+const FIRST_NAME = "first name";
+const LAST_NAME = "last name";
+const BIRTH_YEAR = "birth year";
+const FIRST_PROMPT = "What's your first name?";
+const LAST_PROMPT = "What's your last name?";
+const BIRTH_PROMPT = "What year were you born?";
+
+// Extract user data:
+let firstName = prompt(FIRST_PROMPT);
+let lastName = prompt(LAST_PROMPT);
+let birthYear = parseInt(prompt(BIRTH_PROMPT));
+
+const myDateObj = new Date();
+const thisYear = myDateObj.getFullYear();
+console.log(thisYear);
+let fullName = `${firstName} ${lastName}`;
+let age = thisYear - birthYear;
+console.log(age);
+
+// Y/N loops for user data until agreement:
+// First name:
+// let firstResult = confirmPrompt(FIRST_PROMPT, FIRST_NAME, firstName);
+// firstResult = toString(firstResult).toLowerCase().charAt(0);
+// if (firstResult !== "y") {
+//   firstName = prompt("What's your first name?");
+//   confirmPrompt(FIRST_NAME, firstName);
+// }
+
+// // Last name:
+// let lastResult = confirmPrompt(LAST_NAME, lastName);
+// lastResult = toString(lastResult).toLowerCase().charAt(0);
+// if (lastResult !== "y") {
+//   lastName = prompt("What's your last name?");
+//   confirmPrompt(LAST_NAME, lastName);
+// }
+
+const greeting = `Hello! My name is ${fullName} and I am ${age} years old.`;
+console.log(greeting);
 
 /*
 
@@ -87,25 +159,25 @@ console.log(greeting);
 
 // Test Step 2: 
 
-module.exports = {
-  testGroup: "a",
-  greeting,
-  birthYear,
-  thisYear,
-  firstName,
-  lastName
-}
+// module.exports = {
+//   testGroup: "a",
+//   greeting,
+//   birthYear,
+//   thisYear,
+//   firstName,
+//   lastName
+// }
 
 
 // Test Step 3: (Don't forget to comment out lines under Test Step 2)
 
-// module.exports = {
-// 	testGroup: "b",
-// 	greeting,
-// 	birthYear,
-// 	thisYear,
-// 	firstName,
-// 	lastName,
-// 	fullName,
-// 	age
-// }
+module.exports = {
+  testGroup: "b",
+  greeting,
+  birthYear,
+  thisYear,
+  firstName,
+  lastName,
+  fullName,
+  age
+}
